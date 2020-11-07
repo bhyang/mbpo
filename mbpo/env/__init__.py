@@ -9,6 +9,10 @@ MBPO_ENVIRONMENT_SPECS = (
         'id': 'HumanoidTruncatedObs-v2',
         'entry_point': (f'mbpo.env.humanoid:HumanoidTruncatedObsEnv'),
     },
+    {
+        'id': 'CarlaStraightDynamic-v0',
+        'entry_point': (f'mbpo.env.carla_env:CarlaEnvWrapper'),
+    },
 )
 
 def register_mbpo_environments():

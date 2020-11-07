@@ -48,6 +48,8 @@ class ExperimentRunner(tune.Trainable):
             get_environment_from_params(environment_params['evaluation'])
             if 'evaluation' in environment_params
             else training_environment)
+        training_environment._env.env.testing = False
+        evaluation_environment._env.env.testing = True
 
         replay_pool = self.replay_pool = (
             get_replay_pool_from_variant(variant, training_environment))

@@ -63,7 +63,7 @@ class FlexibleReplayPool(ReplayPool):
                 self.fields_attrs[field_name].get('default_value', 0.0))
             values = samples.get(field_name, default_value)
             assert values.shape[0] == num_samples
-            self.fields[field_name][index] = values
+            self.fields[field_name][index] = values.reshape(num_samples, -1)
 
         self._advance(num_samples)
 

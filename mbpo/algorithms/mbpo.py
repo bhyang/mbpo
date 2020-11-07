@@ -201,7 +201,7 @@ class MBPO(RLAlgorithm):
             self._epoch_before_hook()
             gt.stamp('epoch_before_hook')
 
-            self._training_progress = Progress(self._epoch_length * self._n_train_repeat)
+            # self._training_progress = Progress(self._epoch_length * self._n_train_repeat)
             start_samples = self.sampler._total_samples
             for i in count():
                 samples_now = self.sampler._total_samples
@@ -215,7 +215,7 @@ class MBPO(RLAlgorithm):
                 gt.stamp('timestep_before_hook')
 
                 if self._timestep % self._model_train_freq == 0 and self._real_ratio < 1.0:
-                    self._training_progress.pause()
+                    # self._training_progress.pause()
                     print('[ MBPO ] log_dir: {} | ratio: {}'.format(self._log_dir, self._real_ratio))
                     print('[ MBPO ] Training model at epoch {} | freq {} | timestep {} (total: {}) | epoch train steps: {} (total: {})'.format(
                         self._epoch, self._model_train_freq, self._timestep, self._total_timestep, self._train_steps_this_epoch, self._num_train_steps)
@@ -233,7 +233,7 @@ class MBPO(RLAlgorithm):
 
                     gt.stamp('epoch_rollout_model')
                     # self._visualize_model(self._evaluation_environment, self._total_timestep)
-                    self._training_progress.resume()
+                    # self._training_progress.resume()
 
                 self._do_sampling(timestep=self._total_timestep)
                 gt.stamp('sample')
@@ -312,7 +312,7 @@ class MBPO(RLAlgorithm):
 
         self._training_after_hook()
 
-        self._training_progress.close()
+        # self._training_progress.close()
 
         yield {'done': True, **diagnostics}
 
@@ -653,8 +653,8 @@ class MBPO(RLAlgorithm):
     def _do_training(self, iteration, batch):
         """Runs the operations for updating training and target ops."""
 
-        self._training_progress.update()
-        self._training_progress.set_description()
+        # self._training_progress.update()
+        # self._training_progress.set_description()
 
         feed_dict = self._get_feed_dict(iteration, batch)
 

@@ -227,6 +227,8 @@ ENVIRONMENT_PARAMS = {
         'Wall-v0': {
             'observation_keys': ('observation', 'desired_goal'),
         },
+    },
+    'CarlaStraightDynamic': {
     }
 }
 
