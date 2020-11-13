@@ -10,7 +10,7 @@ MBPO_ENVIRONMENT_SPECS = (
         'entry_point': (f'mbpo.env.humanoid:HumanoidTruncatedObsEnv'),
     },
     {
-        'id': 'CarlaStraightDynamic-v0',
+        'id': 'Carla-StraightDynamic-v0',
         'entry_point': (f'mbpo.env.carla_env:CarlaEnvWrapper'),
     },
 )

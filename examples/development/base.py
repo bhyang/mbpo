@@ -121,6 +121,21 @@ ALGORITHM_PARAMS_PER_DOMAIN = {
 }
 
 ENVIRONMENT_PARAMS = {
+    'Carla': {
+        'StraightDynamic-v0': {
+            # TODO: moving params from hard-coding in carla_env.py
+            'testing': False
+        }
+    }
+}
+
+EVAL_ENVIRONMENT_PARAMS = {
+    'Carla': {
+        'StraightDynamic-v0': {
+            # TODO: moving params from hard-coding in carla_env.py
+            'testing': True
+        }
+    }
 }
 
 NUM_CHECKPOINTS = 10
@@ -147,11 +162,13 @@ def get_variant_spec_base(universe, domain, task, policy, algorithm, env_params)
                 'kwargs': (
                     ENVIRONMENT_PARAMS.get(domain, {}).get(task, {})),
             },
-            'evaluation': tune.sample_from(lambda spec: (
-                spec.get('config', spec)
-                ['environment_params']
-                ['training']
-            )),
+            'evaluation': {
+                'domain': domain,
+                'task': task,
+                'universe': universe,
+                'kwargs': (
+                    EVAL_ENVIRONMENT_PARAMS.get(domain, {}).get(task, {})),
+            },
         },
         'policy_params': deep_update(
             POLICY_PARAMS_BASE[policy],

@@ -42,14 +42,14 @@ class ExperimentRunner(tune.Trainable):
         variant = copy.deepcopy(self._variant)
 
         environment_params = variant['environment_params']
+        environment_params['training']['kwargs']['seed'] = variant['run_params']['seed']
+        environment_params['evaluation']['kwargs']['seed'] = variant['run_params']['seed']
         training_environment = self.training_environment = (
             get_environment_from_params(environment_params['training']))
         evaluation_environment = self.evaluation_environment = (
             get_environment_from_params(environment_params['evaluation'])
             if 'evaluation' in environment_params
             else training_environment)
-        training_environment._env.env.testing = False
-        evaluation_environment._env.env.testing = True
 
         replay_pool = self.replay_pool = (
             get_replay_pool_from_variant(variant, training_environment))

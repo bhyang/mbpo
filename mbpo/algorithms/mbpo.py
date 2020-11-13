@@ -165,6 +165,12 @@ class MBPO(RLAlgorithm):
         self._init_actor_update()
         self._init_critic_update()
 
+    def _epoch_after_hook(self, *args, **kwargs):
+        env = self._evaluation_environment._env.env
+        vis_wrapper = env.vis_wrapper
+        vis_wrapper.generate_video(self._epoch, 0, 0)
+        vis_wrapper.remove_images()
+
     def _train(self):
         
         """Return a generator that performs RL training.
